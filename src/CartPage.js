@@ -1,21 +1,35 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { removeFromCart } from './Store/cartReducer'; // Import the removeFromCart action
 
 const CartPage = () => {
   const cart = useSelector(state => state.cart);
+  const dispatch = useDispatch(); // Initialize useDispatch hook
+
+  const handleRemoveFromCart = (productId) => {
+    dispatch(removeFromCart({ id: productId })); // Dispatch the removeFromCart action with the product id
+  };
 
   return (
     <div>
       <h1>Cart Items</h1>
-      <ul>
+      <div className="product-container">
         {cart.map(item => (
-          <li key={item.id}>
-            <img src={item.thumbnail} alt={item.title} style={{ width: '100px', height: '100px' }} />
-            <p><strong>Title:</strong> {item.title}</p>
-            <p><strong>Price:</strong> ${item.price}</p>
-          </li>
+          <div className="product-card" key={item.id}>
+            <div>
+              <img src={item.thumbnail} alt={item.title} className="product-image" />
+            </div>
+            <div className="product-details">
+              <p><strong>Title:</strong> {item.title}</p>
+              <p><strong>Brand:</strong> {item.brand}</p>
+              <p><strong>Category:</strong> {item.category}</p>
+              <p><strong>Price:</strong> ${item.price}</p>
+              {/* Add more details as needed */}
+            </div>
+            <button className="rotate-button" onClick={() => handleRemoveFromCart(item.id)}>Remove From Cart</button>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 };
