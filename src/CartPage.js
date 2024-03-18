@@ -1,13 +1,12 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { removeFromCart } from './Store/cartReducer'; // Import the removeFromCart action
+import { removeFromCart } from './Store/cartReducer'; 
 
 const CartPage = () => {
   const cart = useSelector(state => state.cart);
-  const dispatch = useDispatch(); // Initialize useDispatch hook
-
+  const dispatch = useDispatch(); 
   const handleRemoveFromCart = (productId) => {
-    dispatch(removeFromCart({ id: productId })); // Dispatch the removeFromCart action with the product id
+    dispatch(removeFromCart({ id: productId })); 
   };
 
   return (
