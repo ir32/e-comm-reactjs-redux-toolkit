@@ -9,6 +9,9 @@ const CartPage = () => {
     dispatch(removeFromCart({ id: productId })); 
   };
 
+  // Calculate total price
+  const totalPrice = cart.reduce((total, item) => total + item.price, 0);
+
   return (
     <div>
       <h1>Cart Items</h1>
@@ -28,6 +31,11 @@ const CartPage = () => {
             <button className="rotate-button" onClick={() => handleRemoveFromCart(item.id)}>Remove From Cart</button>
           </div>
         ))}
+      </div>
+      
+      <div>
+        <h2>Total Price: ${totalPrice.toFixed(2)}</h2> {/* Display total price */}
+        <button className="proceed-button">Proceed to Checkout</button>
       </div>
     </div>
   );
