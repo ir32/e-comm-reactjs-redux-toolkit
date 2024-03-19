@@ -19,7 +19,7 @@ function App() {
         <Route path="/" element={<Layout />}>
           <Route index element={<CommentsTable />} />
           <Route path="blogs" element={<Fetch />} />
-          <Route path="contact" element={<Product />} />
+          <Route path="product" element={<Product />} />
           <Route path="product/:id" element={<ProductDetails />} /> 
           <Route path="sign-up" element={<SignupForm />} />
           <Route path="cart" element={<CartPage />} />
