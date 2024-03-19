@@ -87,6 +87,7 @@ const Product = () => {
       <button onClick={getLocation} className='btn btn-primary btn-sm' style={{ width: '10%' }}>Location</button>
         <span >{response}</span>
 
+
       </div>
       <div className="product-container">
         {products.map(product => (
