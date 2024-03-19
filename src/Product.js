@@ -8,7 +8,6 @@ const Product = () => {
   const [products, setProducts] = useState([]);
   const navigate = useNavigate(); 
   const dispatch = useDispatch();
-  const [response, setResponse] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,55 +22,11 @@ const Product = () => {
     fetchData();
   }, []);
 
-  const getLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(showLocationName, showError);
-    } else {
-      alert("Geolocation is not supported by this browser.");
-    }
-  };
+  
 
-  function showLocationName(position) {
-    var latitude = position.coords.latitude;
-    var longitude = position.coords.longitude;
+ 
 
-    var url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${latitude}&lon=${longitude}`;
-
-    fetch(url)
-      .then(response => response.json())
-      .then(data => {
-        if (data.display_name) {
-          var locationName = data.display_name;
-          //alert("Location: " + locationName);
-          setResponse("Location: " + locationName);
-
-        } else {
-          alert("Failed to fetch location name.");
-        }
-      })
-      .catch(error => {
-        console.error('Error fetching location name:', error);
-        alert("An error occurred while fetching location name.");
-      });
-  }
-
-  function showError(error) {
-    switch(error.code) {
-      case error.PERMISSION_DENIED:
-        alert("User denied the request for Geolocation.");
-        break;
-      case error.POSITION_UNAVAILABLE:
-        alert("Location information is unavailable.");
-        break;
-      case error.TIMEOUT:
-        alert("The request to get user location timed out.");
-        break;
-      case error.UNKNOWN_ERROR:
-        alert("An unknown error occurred.");
-        break;
-    }
-  }
-
+  
   const handleClick = (productId) => {
     navigate(`/product/${productId}`); 
   };
@@ -82,13 +37,8 @@ const Product = () => {
   };
 
   return (
-    <div> 
-      <div style={{marginTop : '30px'}}>
-      <button onClick={getLocation} className='btn btn-primary btn-sm' style={{ width: '10%' }}>Location</button>
-        <span >{response}</span>
-
-
-      </div>
+     
+      
       <div className="product-container">
         {products.map(product => (
           <div className="product-card" key={product.id}>
@@ -105,7 +55,7 @@ const Product = () => {
           </div>
         ))}
       </div>
-    </div>
+    
   );
 };
 
